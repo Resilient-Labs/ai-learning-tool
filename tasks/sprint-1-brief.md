@@ -1,197 +1,220 @@
 # Sprint 1 Brief: AI Learning Platform Foundation
-**Week 1 of 8 | Team: 18 Engineers | Duration: 5 Days | Task Size: 2-3 hours each**
+**Week 1 of 8 | Team: 18 Engineers | Duration: 5 Days | Task Size: 2–3 hours each**
 
 ---
 
 ## 🎯 Sprint Goals
 
 ### Primary Objectives
-1. **Establish Core Infrastructure** - Set up authentication, database, and basic API foundation
-2. **Enable Basic AI Tutoring** - Create functional chat interface with LLM integration
-3. **Build Analytics Foundation** - Implement basic instructor dashboard for student insights
-4. **Ensure System Reliability** - Deploy with monitoring, testing, and CI/CD pipeline
+1. **Establish Core Infrastructure** – Auth provider integration, database schema, API foundation.  
+2. **Enable Basic AI Tutoring** – Chat interface with LLM integration.  
+3. **Build Analytics Foundation** – Instructor dashboard for student activity.  
+4. **Ensure System Reliability** – CI/CD pipeline, monitoring, and serverless deployment.  
 
 ### Success Definition
-- Students can register, log in, and have basic conversations with AI tutor
-- Instructors can view simple student progress metrics
-- System operates with 99%+ uptime and <3s AI response times
-- Foundation established for Sprint 2 development
-
----
-
-## ✅ Features IN Scope
-
-### Authentication & User Management
-- **Task 1:** User registration form with email validation
-- **Task 2:** JWT-based login/logout API endpoints
-- **Task 3:** Password reset functionality and email integration
-
-### Basic AI Chat System
-- **Task 4:** Simple chat interface with message bubbles
-- **Task 5:** LLM integration with basic prompt handling (OpenAI/Anthropic TBD Day 1)
-- **Task 6:** Message storage and basic conversation history
-
-### Student Dashboard
-- **Task 7:** Clean chat interface layout
-- **Task 8:** Basic conversation history viewer
-- **Task 9:** Simple progress indicators (sessions count, time spent)
-
-### Instructor Analytics
-- **Task 10:** Basic admin dashboard layout
-- **Task 11:** Student activity metrics (active users, session counts)
-- **Task 12:** Simple data export (CSV format)
-
-### Infrastructure & DevOps
-- **Task 13:** PostgreSQL setup with basic user/conversation schemas
-- **Task 14:** GitHub Actions CI/CD pipeline with basic tests
-- **Task 15:** Basic monitoring setup and production deployment
-
----
-
-## ❌ Features OUT of Scope
-
-### Advanced Features (Save for Later Sprints)
-- Real-time WebSocket connections (use polling for now)
-- Advanced AI personalization or context memory
-- Code execution environment or syntax highlighting
-- GitHub integration or project submissions
-- Mobile native apps (web responsive only)
-
-### Security & Performance (Basic Only)
-- Multi-factor authentication (simple JWT only)
-- Advanced rate limiting (basic only)
-- Horizontal scaling (single instance for now)
-- Advanced caching strategies
-
-### Analytics (Keep Simple)
-- Real-time analytics updates (batch processing only)
-- Individual student conversation access for instructors
-- Advanced reporting or data visualization
-- Predictive analytics or ML insights
+- Students can register, log in, and chat with the AI tutor.  
+- Instructors can view basic student activity metrics.  
+- App deployed to Vercel (frontend) and AWS Lambda (backend) with monitoring.  
+- Foundation ready for Sprint 2 development.  
 
 ---
 
 ## ⚠️ Key Risks
-
-### High Priority Risks (Address Day 1-2)
-1. **LLM Provider Decision Delay** - Must choose OpenAI vs Anthropic by EOD Day 1
-   - *Impact:* 6+ hour delay in chat functionality
-   - *Mitigation:* Parallel evaluation, decision matrix ready, fallback to OpenAI
-
-2. **Database Schema Complexity** - Over-engineering initial schema
-   - *Impact:* 4+ hour delay, integration issues
-   - *Mitigation:* Start with minimal schema, iterate in Sprint 2
-
-3. **Team Task Coordination** - 18 engineers, 15 interconnected tasks
-   - *Impact:* Integration failures, duplicate work
-   - *Mitigation:* Daily 15-min standups, clear API contracts, task dependencies mapped
-
-### Medium Priority Risks (Monitor Daily)
-4. **AI Response Quality** - Initial responses may be generic or unhelpful
-   - *Impact:* Poor demo, user dissatisfaction
-   - *Mitigation:* Basic prompt engineering, simple feedback collection
-
-5. **Authentication Integration** - Frontend/backend auth mismatch
-   - *Impact:* 3+ hour debugging sessions
-   - *Mitigation:* API contract defined Day 1, integration testing
+1. **LLM Provider Decision Delay** – Must pick OpenAI vs Anthropic Day 1.  
+2. **Schema Over-Engineering** – Keep minimal, refine in Sprint 2.  
+3. **Large Team Coordination** – Daily 15-min standups + API contracts.  
+4. **AI Response Quality** – Mitigate with simple prompt engineering.  
+5. **Auth Provider Integration** – Validate setup Day 1.  
 
 ---
 
 ## 📊 Success Metrics
 
-### Technical Success (Must Meet)
-- **Uptime:** 99%+ during demo hours (no critical crashes)
-- **Response Time:** AI chat responses under 5 seconds (not 3s yet)
-- **Deployment:** Successful production deployment with rollback capability
-- **Test Coverage:** Basic tests for authentication and chat flow
+### User Experience
+- **Student Flow:** Register → Login → Chat.  
+- **Instructor Flow:** Login → View student list → See metrics.  
+- **Error Handling:** Graceful messages.  
+- **Responsive:** Works on desktop + tablet.  
 
-### User Experience Success (Demo Ready)
-- **Student Flow:** Register → Login → Send message → Receive AI response
-- **Instructor Flow:** Login → View student list → See basic activity metrics
-- **Error Handling:** Graceful failures with user-friendly messages
-- **Responsive Design:** Works on desktop and tablet
-
-### Team Success (Process)
-- **Task Completion:** 80% of 15 tasks completed on time
-- **Integration:** No major blockers between frontend/backend teams
-- **Documentation:** Basic API docs and setup instructions complete
-- **Team Velocity:** Establish baseline for Sprint 2 planning
+### Team Process
+- **Completion:** 80%+ of tasks delivered.  
+- **Integration:** No major frontend/backend blockers.  
+- **Docs:** Setup + API guide complete.  
+- **Velocity:** Baseline set for Sprint 2.  
 
 ---
 
-## 🏗️ Team Organization & Task Assignments
+## 🏗️ Team Organization & Responsibilities
 
-### Frontend Team (6 Engineers)
-**Team A (3 Engineers):** Authentication & User Interface
-- **Engineer 1:** Task 1 - Registration form
-- **Engineer 2:** Task 7 - Chat interface layout + Task 8 - History viewer
-- **Engineer 3:** Task 9 - Progress indicators + Task 3 frontend integration 
+## 🔹 Frontend Team (6 Engineers)
 
-**Team B (3 Engineers):** Admin Dashboard & Integration
-- **Engineer 4:** Task 10 - Admin dashboard + Task 11 frontend
-- **Engineer 5:** Task 12 frontend - Export functionality + integration testing
-- **Engineer 6:** Cross-team integration + responsive design fixes
+### **Team A (3 Engineers): Authentication & Student Experience**
+- **Engineer 1**  
+  - Auth provider integration on frontend.  (Clerk or Auth0)
+  - Registration + login forms.  
+  - Role-based redirects.  
 
-### Backend Team (6 Engineers) 
-**Team C (3 Engineers):** Authentication & User Management
-- **Engineer 7:** Task 2 - Login/logout API + JWT middleware
-- **Engineer 8:** Task 3 - Password reset API + email service 
-- **Engineer 9:** User management endpoints + database integration 
+- **Engineer 2**  
+  - Chat UI (message bubbles + state mgmt).  
+  - Conversation history view.  
+  - Hook into chatbot API.  
 
-**Team D (3 Engineers):** Chat & Analytics
-- **Engineer 10:** Task 5 - LLM integration + Task 6 - Message storage
-- **Engineer 11:** Task 11 backend - Analytics API + Task 12 backend - Export
-- **Engineer 12:** API documentation + error handling
-
-### DevOps Team (3 Engineers) All code reviews +
-- **Engineer 13:** Task 13 - Database setup
-- **Engineer 14:** Task 14 - CI/CD pipeline
-- **Engineer 15:** Task 15 - Monitoring & deployment
-
-### Full-Stack Team (3 Engineers)
-- **Engineer 16:** Integration testing + bug fixes
-- **Engineer 17:** Performance testing + optimization
-- **Engineer 18:** Documentation + demo preparation
+- **Engineer 3**  
+  - Student dashboard layout.  
+  - Progress indicators (sessions, time).  
+  - Accessibility + responsive polish.  
 
 ---
 
-## 🚀 Definition of Done (Per Task)
+### **Team B (3 Engineers): Admin Dashboard & Integration**
+- **Engineer 4**  
+  - Admin dashboard shell (navigation + layout).  
+  - Lesson CRUD UI.  
 
-### Individual Task Completion
-- [ ] Code written and self-reviewed
-- [ ] Basic functionality tested manually
-- [ ] No linting errors or console warnings
-- [ ] Committed to feature branch with clear commit message
+- **Engineer 5**  
+  - Analytics visualizations (tables, charts).  
+  - Export (CSV).  
 
-### Sprint Completion
-- [ ] All 15 tasks completed or 80% with clear reasons for incomplete
-- [ ] Student can complete full registration → chat flow
-- [ ] Instructor can log in and see basic student metrics
-- [ ] System deployed to production with basic monitoring
-- [ ] Demo successfully presented to stakeholders
-- [ ] Sprint 2 priorities identified and estimated
+- **Engineer 6**  
+  - Responsive design QA.  
+  - Frontend integration testing (Playwright/Cypress).  
+  - Bug fixes + polish.  
 
 ---
 
-## 📞 Daily Support & Escalation
+## 🔹 Backend Team (6 Engineers)
 
-### Decision Points (Resolve Quickly)
-- **LLM Provider:** Product Manager + Tech Lead decide by EOD Monday
-- **Database Schema:** Backend Team Lead decides by Tuesday noon
-- **UI Framework Details:** Frontend Team Lead decides by Tuesday noon
+### **Team C (3 Engineers): Authentication & User Management**
+- **Engineer 7**  
+  - Auth provider backend hooks (user creation, login/logout). (Clerk or Auth0)
+  - Role enforcement (Student vs. Admin) 
 
-### Blocker Escalation
-- **Technical Issues:** Team lead → Tech Lead (within 2 hours)
-- **Integration Problems:** Affected teams → Full-Stack Team (immediate)
-- **Infrastructure Issues:** DevOps Lead → External support (immediate)
+- **Engineer 8**  
+  - Password reset flow using provider API.  
+  - Rate-limiting middleware.  
 
-### Success Criteria
-- **No task blocked for >4 hours**
-- **All teams have working code by Thursday EOD**
-- **Demo-ready system by Friday 1 PM**
+- **Engineer 9**  
+  - Postgres schema for users (student/admin).  
+  - Auth provider → DB sync.  
+  - API tests for user flows.  
 
 ---
 
-**Sprint 1 = Solid Foundation for 7 More Weeks of Innovation** 🚀
+### **Team D (3 Engineers): Chatbot & Analytics**
+- **Engineer 10**  
+  - Integrate Vercel AI SDK for chatbot responses (using a model provider like OpenAI/Anthropic).  
+  - Implement streaming chat responses via Vercel SDK so UI shows incremental replies.  
+  - Ensure conversation history is stored in DB for each chat session.
 
-*This brief is your single source of truth. Each task should take 2-3 hours max. If any task is taking longer, escalate immediately.*
+- **Engineer 11**  
+  - Analytics API (aggregate progress).  
+  - Build `GET /api/analytics/students` to return student summaries: `total_sessions`, `avg_session_length`, `last_active_at`. 
+
+- **Engineer 12**  
+  - Ensure conversation history is stored in DB for each chat session.
+  - Implement error handling + logging middleware.  
+ 
+
+---
+
+## 🔹 DevOps Team (3 Engineers)
+
+- **Engineer 13**  
+  - Postgres instance setup.  
+  - Code Reviews 
+
+- **Engineer 14**  
+  - Build GitHub Actions CI/CD pipeline for automated testing + deploys to Vercel (frontend + serverless backend).  
+  - Configure staging and production environments in Vercel.  
+  - Manage environment variables/secrets through Vercel dashboard.  
+  - Code Reviews
+
+- **Engineer 15**  
+  - Implement monitoring + logging using Vercel Analytics and Vercel Logs.  
+  - Own production deployments (review + promote from staging to prod).  
+  - Code Reviews 
+
+**Additional DevOps Responsibility:**  
+- Review **all pull requests** across teams to enforce code quality, testing, and security standards.  
+
+---
+
+## 🔹 Full-Stack / Integration Team (3 Engineers)
+
+- **Engineer 16**  
+  - End-to-end integration testing (student + admin flows).  
+  - Coordinate bug triage.  
+
+- **Engineer 17**  
+  - Performance testing + optimization.  
+  - Identify backend bottlenecks.  
+
+- **Engineer 18**  
+  - Developer documentation (setup + contribution guide).  
+  - Demo prep (seed users, sample lessons).  
+
+---
+
+## 🔹 Notes
+- DevOps reviews **all PRs**.  
+- Engineers work in **3-person pods** for collaboration.  
+- Integration team ensures no drift across features.  
+- Scope = MVP only: chatbot, dashboards, progress tracking, analytics.  
+
+---
+
+## 🚀 Definition of Done
+
+**For Each Task**
+- Code written + self-reviewed.  
+- Functionality manually tested.  
+- No lint errors.  
+- PR reviewed + merged.  
+
+**For Sprint Completion**
+- Student can register, login, chat.  
+- Instructor can login, view student metrics.  
+- Deployed to prod with monitoring.  
+- Demo-ready by Friday 1 PM.  
+
+---
+
+**Sprint 1 = Solid Foundation for the Learning Platform** 🚀
+
+
+## ✅ Features IN Scope
+
+### Authentication & User Management
+- Integrate with an auth provider (Auth0, Clerk, or Supabase).  
+- Support student vs. admin roles.  
+- Password reset + email integration via provider.  
+
+### Basic AI Chat System
+- Chat UI with message bubbles.  
+- LLM integration (OpenAI/Anthropic TBD).  
+- Store and retrieve conversation history.  
+
+### Student Dashboard
+- Student dashboard shell.  
+- Conversation history viewer.  
+- Simple progress indicators (sessions count, time spent).  
+
+### Instructor Analytics
+- Admin dashboard layout.  
+- Student activity metrics (active users, session counts).  
+- Export functionality (CSV).  
+
+### Infrastructure & DevOps
+- Postgres setup with minimal schemas.  
+- GitHub Actions CI/CD to Vercel + AWS Lambda.  
+- Monitoring/alerts with Vercel Analytics + CloudWatch.  
+
+---
+
+## ❌ Features OUT of Scope
+- Real-time WebSockets (use polling).  
+- Advanced personalization or AI memory.  
+- MFA (single sign-on only).  
+- Horizontal scaling (serverless covers MVP load).  
+- Mobile native apps (web responsive only).  
+- Advanced analytics or predictive insights.  
