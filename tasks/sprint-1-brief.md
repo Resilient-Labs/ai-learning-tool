@@ -124,31 +124,31 @@
 ### Frontend Team (6 Engineers)
 **Team A (3 Engineers):** Authentication & User Interface
 - **Engineer 1:** Task 1 - Registration form
-- **Engineer 2:** Task 7 - Chat interface layout + Task 8 - History viewer (2h)
-- **Engineer 3:** Task 9 - Progress indicators (2h) + Task 3 frontend integration (2h)
+- **Engineer 2:** Task 7 - Chat interface layout + Task 8 - History viewer
+- **Engineer 3:** Task 9 - Progress indicators + Task 3 frontend integration 
 
 **Team B (3 Engineers):** Admin Dashboard & Integration
-- **Engineer 4:** Task 10 - Admin dashboard (2h) + Task 11 frontend (2h)
-- **Engineer 5:** Task 12 frontend - Export functionality (2h) + integration testing (2h)
-- **Engineer 6:** Cross-team integration + responsive design fixes (4h)
+- **Engineer 4:** Task 10 - Admin dashboard + Task 11 frontend
+- **Engineer 5:** Task 12 frontend - Export functionality + integration testing
+- **Engineer 6:** Cross-team integration + responsive design fixes
 
-### Backend Team (6 Engineers) - 18 hours
+### Backend Team (6 Engineers) 
 **Team C (3 Engineers):** Authentication & User Management
-- **Engineer 7:** Task 2 - Login/logout API (2h) + JWT middleware
-- **Engineer 8:** Task 3 - Password reset API (2h) + email service 
+- **Engineer 7:** Task 2 - Login/logout API + JWT middleware
+- **Engineer 8:** Task 3 - Password reset API + email service 
 - **Engineer 9:** User management endpoints + database integration 
 
 **Team D (3 Engineers):** Chat & Analytics
-- **Engineer 10:** Task 5 - LLM integration (3h) + Task 6 - Message storage
-- **Engineer 11:** Task 11 backend - Analytics API (2h) + Task 12 backend - Export
+- **Engineer 10:** Task 5 - LLM integration + Task 6 - Message storage
+- **Engineer 11:** Task 11 backend - Analytics API + Task 12 backend - Export
 - **Engineer 12:** API documentation + error handling
 
-### DevOps Team (3 Engineers) - 9 hours
+### DevOps Team (3 Engineers) All code reviews +
 - **Engineer 13:** Task 13 - Database setup
 - **Engineer 14:** Task 14 - CI/CD pipeline
 - **Engineer 15:** Task 15 - Monitoring & deployment
 
-### Full-Stack Team (3 Engineers) - 9 hours
+### Full-Stack Team (3 Engineers)
 - **Engineer 16:** Integration testing + bug fixes
 - **Engineer 17:** Performance testing + optimization
 - **Engineer 18:** Documentation + demo preparation
