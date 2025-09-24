@@ -73,7 +73,7 @@
 
 - **Engineer 5**  
   - Analytics visualizations (tables, charts).  
-  - Export (CSV).  
+
 
 - **Engineer 6**  
   - Responsive design QA.  
