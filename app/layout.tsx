@@ -1,11 +1,37 @@
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+import { Header } from "@/components/Header";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "AI Learning tool",
+  description: "Created by AiFe 2025"
+};
+
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+  children
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        {/* <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        > */}
+          <Header />
+          {children}
+          <Toaster />
+        {/* </ThemeProvider> */}
+        <Analytics />
+      </body>
     </html>
-  )
+  );
 }
