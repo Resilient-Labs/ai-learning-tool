@@ -28,7 +28,7 @@ interface CardDescriptionProps {
 export const Card: React.FC<CardProps> = (props) => {
   const { children, className = "" } = props;
   return (
-    <div className={`bg-white rounded-lg border shadow-sm ${className}`}>
+    <div className={`bg-white rounded-lg border border-gray-200 shadow-sm ${className}`}>
       {children}
     </div>
   );

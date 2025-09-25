@@ -17,7 +17,7 @@ export const StatsCard: React.FC<Props> = (props) => {
     className = "" 
   } = props;
   return (
-    <div className={`bg-white rounded-lg border p-6 ${className}`}>
+    <div className={`bg-white rounded-lg border border-gray-200 p-6 ${className}`}>
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-sm font-medium text-gray-600">{title}</p>
