@@ -8,8 +8,8 @@ import { Header } from "@/components/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Learning tool",
-  description: "Created by AiFe 2025"
+  title: "Dashboard",
+  description: "Your Dashboard"
 };
 
 export default function RootLayout({

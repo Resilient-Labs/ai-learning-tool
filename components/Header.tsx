@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -27,6 +28,21 @@ import {
   LogOut,
   User
 } from "lucide-react";
+
+const user = {
+  id: "e4a2c7b8-1f5c-4d9e-9b0a-3c8d1e5f7b2a",
+  email: "flim.flam@resilientcoders.org",
+  first_name: "Flim",
+  last_name: "Flam",
+  role: "student",
+  cohort: "2025A",
+  created_at: "2025-09-27T10:00:00Z",
+  updated_at: "2025-09-27T10:00:00Z",
+  last_login: "2025-09-27T10:00:00Z",
+  is_active: true,
+  auth_provider: "supabase",
+  provider_id: null
+};
 
 export function Header() {
   const router = useRouter();
@@ -75,10 +91,10 @@ export function Header() {
                 "text-foreground hover:text-primary",
                 pathname === "#" && "text-primary"
               )}
-              onClick={() => router.push("#")}
+              onClick={() => router.push("/ui-docs")}
             >
               <BookOpen className="h-4 w-4 mr-2" />
-              Page
+              UI Docs
             </Button>
             <Button
               variant="ghost"
@@ -88,8 +104,7 @@ export function Header() {
               )}
               onClick={() => router.push("#")}
             >
-              <Brain className="h-4 w-4 mr-2" />
-              Page
+              <Brain className="h-4 w-4 mr-2" />#
             </Button>
             <Button
               variant="ghost"
@@ -99,8 +114,7 @@ export function Header() {
               )}
               onClick={() => router.push("#")}
             >
-              <Trophy className="h-4 w-4 mr-2" />
-              Page
+              <Trophy className="h-4 w-4 mr-2" />#
             </Button>
           </nav>
 
@@ -113,12 +127,12 @@ export function Header() {
                 <Avatar>
                   <AvatarImage
                     src="/placeholder-user.jpg"
-                    alt={"User avatar"}
+                    alt={user.first_name + " " + user.last_name}
                   />
                   <AvatarFallback>
                     {getUserInitials(
-                      "Resilient Coder",
-                      "example@resilientcoders.org"
+                      user.first_name + " " + user.last_name,
+                      user.email
                     )}
                     {/* {getUserInitials(session.user.name, session.user.email)} */}
                   </AvatarFallback>
@@ -128,11 +142,12 @@ export function Header() {
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    {"Resilient Coder"}
+                  <p className="text-sm font-medium leading-none flex justify-between">
+                    <span>{user.first_name + " " + user.last_name}</span>
+                    <Badge variant="destructive">{user.cohort}</Badge>
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    {"example@resilientcoders.org"}
+                    {user.email}
                   </p>
                 </div>
               </DropdownMenuLabel>
@@ -145,7 +160,7 @@ export function Header() {
                 <Settings className="h-4 w-4 mr-2" />
                 Settings
               </DropdownMenuItem>
-              {("session.user.role" as string) === "admin" && (
+              {user.role === "admin" && (
                 <DropdownMenuItem onClick={() => router.push("#")}>
                   <Settings className="h-4 w-4 mr-2" />
                   Admin Panel
