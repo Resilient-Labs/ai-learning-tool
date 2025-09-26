@@ -11,31 +11,6 @@ interface Props {
 export const TopicDifficultyAnalysis: React.FC<Props> = (props) => {
   const { topics, className = "" } = props;
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'High':
-        return 'text-red-600 bg-red-100';
-      case 'Medium':
-        return 'text-yellow-600 bg-yellow-100';
-      case 'Low':
-        return 'text-green-600 bg-green-100';
-      default:
-        return 'text-gray-600 bg-gray-100';
-    }
-  };
-
-  const getDifficultyIcon = (difficulty: string) => {
-    switch (difficulty) {
-      case 'High':
-        return <IconAlertCircle className="w-4 h-4" />;
-      case 'Medium':
-        return <IconClock className="w-4 h-4" />;
-      case 'Low':
-        return <IconCheck className="w-4 h-4" />;
-      default:
-        return <IconChartBar className="w-4 h-4" />;
-    }
-  };
 
   const highDifficultyTopics = topics.filter(t => t.difficulty === 'High');
   const mediumDifficultyTopics = topics.filter(t => t.difficulty === 'Medium');

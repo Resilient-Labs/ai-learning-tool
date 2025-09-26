@@ -7,10 +7,10 @@ import { LessonCard } from "../../../components/admin/LessonCard"
 import { Lesson, generateSampleLessons } from "@/types/data"
 
 interface Props {
-  // Add any props that might be passed from parent components
+  className?: string;
 }
 
-const LessonsPage: React.FC<Props> = (props) => {
+const LessonsPage: React.FC<Props> = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   const lessons = generateSampleLessons()

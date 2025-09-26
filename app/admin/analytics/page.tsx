@@ -1,16 +1,16 @@
 "use client"
 import React from "react"
-import { generateSampleAnalytics } from "@/types/data"
+// import { generateSampleAnalytics } from "@/types/data"
 import { Button } from "../../../components/ui/Button"
 import { StatsCard } from "../../../components/ui/StatsCard"
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "../../../components/ui/Card"
 import { Badge } from "../../../components/ui/Badge"
 
 interface Props {
-  // Add any props that might be passed from parent components
+  className?: string;
 }
 
-const AnalyticsPage: React.FC<Props> = (props) => {
+const AnalyticsPage: React.FC<Props> = () => {
   return (
     <div className="p-6 space-y-6">
       {/* Header */}

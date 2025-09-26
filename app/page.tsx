@@ -2,10 +2,10 @@ import React from "react"
 import { redirect } from "next/navigation"
 
 interface Props {
-  // Add any props that might be passed from parent components
+  className?: string;
 }
 
-const HomePage: React.FC<Props> = (props) => {
+const HomePage: React.FC<Props> = () => {
   redirect("/admin")
 };
 

@@ -7,13 +7,13 @@ import { StudentCard } from "../../../components/admin/StudentCard"
 import { StudentTable } from "../../../components/admin/StudentTable"
 import { Student, generateSampleStudents, generateSampleStudentProgress } from "@/types/data"
 import { StudentProgressTracker } from "../../../components/instructor/StudentProgressTracker"
-import { IconPlus, IconSearch, IconUsers, IconBook, IconTrendingUp, IconClock } from "@tabler/icons-react"
+import { IconSearch, IconUsers, IconBook, IconTrendingUp, IconClock } from "@tabler/icons-react"
 
 interface Props {
-  // Add any props that might be passed from parent components
+  className?: string;
 }
 
-const StudentsPage: React.FC<Props> = (props) => {
+const StudentsPage: React.FC<Props> = () => {
   const [viewMode, setViewMode] = useState<"cards" | "table">("cards")
   const [searchTerm, setSearchTerm] = useState("")
 

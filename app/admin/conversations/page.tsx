@@ -8,10 +8,10 @@ import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "../..
 import { Conversation, generateSampleConversations } from "@/types/data"
 
 interface Props {
-  // Add any props that might be passed from parent components
+  className?: string;
 }
 
-const ConversationsPage: React.FC<Props> = (props) => {
+const ConversationsPage: React.FC<Props> = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   const conversations = generateSampleConversations()

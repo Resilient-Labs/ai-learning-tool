@@ -1,8 +1,6 @@
 "use client"
 import React from "react"
-import { 
-  generateSampleDashboardStats, 
-  generateSampleRecentActivity,
+import {
   generateSampleStrugglingStudents,
   generateSampleTopicDifficulties,
   generateSampleHotTopics
@@ -19,12 +17,12 @@ import { HotTopics } from "../../components/instructor/HotTopics"
 import { IconUsers, IconBook, IconMessageCircle, IconTrendingUp, IconPlus, IconEye, IconEdit, IconTrash } from "@tabler/icons-react"
 
 interface Props {
-  // Add any props that might be passed from parent components
+  className?: string;
 }
 
-const AdminDashboard: React.FC<Props> = (props) => {
-  const stats = generateSampleDashboardStats()
-  const recentActivity = generateSampleRecentActivity()
+const AdminDashboard: React.FC<Props> = () => {
+  // const stats = generateSampleDashboardStats()
+  // const recentActivity = generateSampleRecentActivity()
   const strugglingStudents = generateSampleStrugglingStudents()
   const topicDifficulties = generateSampleTopicDifficulties()
   const hotTopics = generateSampleHotTopics()
