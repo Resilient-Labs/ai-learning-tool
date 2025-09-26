@@ -17,7 +17,6 @@ import {
   SheetHeader,
   SheetTitle
 } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
@@ -598,7 +597,7 @@ function SidebarMenuBadge({
     />
   );
 }
-
+/**
 function SidebarMenuSkeleton({
   className,
   showIcon = false,
@@ -633,6 +632,7 @@ function SidebarMenuSkeleton({
     </div>
   );
 }
+*/
 
 function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
   return (

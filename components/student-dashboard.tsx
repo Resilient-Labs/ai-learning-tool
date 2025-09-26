@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Card,
   CardContent,
@@ -9,161 +11,6 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Switch } from "@/components/ui/switch";
-import { Slider } from "@/components/ui/slider";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from "@/components/ui/accordion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from "@/components/ui/sheet";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger
-} from "@/components/ui/popover";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger
-} from "@/components/ui/hover-card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger
-} from "@/components/ui/context-menu";
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarTrigger
-} from "@/components/ui/menubar";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger
-} from "@/components/ui/navigation-menu";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from "@/components/ui/command";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@/components/ui/table";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from "@/components/ui/breadcrumb";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from "@/components/ui/pagination";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Toggle } from "@/components/ui/toggle";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from "@/components/ui/tooltip";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger
-} from "@/components/ui/collapsible";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger
-} from "@/components/ui/drawer";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot
-} from "@/components/ui/input-otp";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup
-} from "@/components/ui/resizable";
 import {
   Carousel,
   CarouselContent,
@@ -172,21 +19,35 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from "@/components/ui/alert-dialog";
-import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent
 } from "@/components/ui/chart";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Activity,
+  BookOpen,
+  Bot,
+  CalendarIcon,
+  Camera,
+  CheckCircle,
+  Clock,
+  Mic,
+  Send,
+  Star,
+  Target,
+  TrendingUp,
+  Upload,
+  User,
+  Users,
+  Zap
+} from "lucide-react";
+import { useState } from "react";
 import {
   CartesianGrid,
   Cell,
@@ -194,142 +55,10 @@ import {
   LineChart,
   Pie,
   PieChart,
-  PieLabel,
   ResponsiveContainer,
   XAxis,
   YAxis
 } from "recharts";
-import {
-  BookOpen,
-  Users,
-  MessageCircle,
-  GraduationCap,
-  CalendarIcon,
-  Bell,
-  Settings,
-  Search,
-  ChevronDown,
-  Star,
-  Heart,
-  ThumbsUp,
-  Bot,
-  User,
-  Send,
-  Mic,
-  Camera,
-  FileText,
-  Download,
-  Upload,
-  Edit,
-  Trash2,
-  Plus,
-  Play,
-  AlertCircle,
-  CheckCircle,
-  Clock,
-  Eye,
-  Home,
-  Share,
-  Sidebar,
-  Target,
-  Trash,
-  TrendingUp,
-  XCircle,
-  Zap,
-  Activity,
-  Bolt
-} from "lucide-react";
-import {
-  SidebarProvider,
-  SidebarHeader,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarFooter,
-  SidebarTrigger
-} from "@/components/ui/sidebar";
-import { useToast } from "@/hooks/use-toast";
-
-// Mock data for demonstration
-const mockConversations = [
-  {
-    id: "1",
-    title: "Introduction to React Hooks",
-    lastMessage: "Can you explain useEffect dependencies?",
-    timestamp: "2 hours ago",
-    unread: 0
-  },
-  {
-    id: "2",
-    title: "JavaScript Closures",
-    lastMessage: "Thanks for the explanation!",
-    timestamp: "1 day ago",
-    unread: 0
-  },
-  {
-    id: "3",
-    title: "CSS Grid Layout",
-    lastMessage: "How do I center items in a grid?",
-    timestamp: "3 days ago",
-    unread: 2
-  }
-];
-
-const mockMessages = [
-  {
-    id: "1",
-    content: "Hello! I'm your AI learning assistant. How can I help you today?",
-    sender: "ai",
-    timestamp: "10:30 AM"
-  },
-  {
-    id: "2",
-    content: "I'm struggling with understanding React hooks. Can you help?",
-    sender: "user",
-    timestamp: "10:32 AM"
-  },
-  {
-    id: "3",
-    content:
-      "Absolutely! React hooks are functions that let you use state and other React features in functional components. The most common ones are useState and useEffect. Would you like me to explain useState first?",
-    sender: "ai",
-    timestamp: "10:33 AM"
-  }
-];
-
-const mockStats = {
-  sessionsCount: 12,
-  totalTime: "24h 30m",
-  topicsLearned: ["React", "JavaScript", "CSS", "HTML"],
-  currentStreak: 7,
-  achievements: [
-    {
-      id: "1",
-      name: "First Steps",
-      description: "Completed your first lesson",
-      icon: "🎯",
-      earned: true
-    },
-    {
-      id: "2",
-      name: "Week Warrior",
-      description: "7-day learning streak",
-      icon: "🔥",
-      earned: true
-    },
-    {
-      id: "3",
-      name: "Code Master",
-      description: "Complete 50 coding challenges",
-      icon: "💻",
-      earned: false
-    }
-  ]
-};
 
 const chartData = [
   { day: "Mon", lessons: 10, flashCards: 1, chats: 3 },
@@ -342,83 +71,35 @@ const chartData = [
 ];
 
 const pieData = [
-  { name: "JavaScript", description: "The programming language of the web", value: 400, fill: "var(--chart-1)" },
-  { name: "Python", description: "Train Machine Learning Models", value: 300, fill: "var(--chart-2)" },
-  { name: "Java", description: "Build Android Apps", value: 200, fill: "var(--chart-3)" },
-  { name: "C", description: "Low-Level Systems Programming", value: 100, fill: "var(--chart-4)" }
-];
-
-const students = [
   {
-    id: 1,
-    name: "Alice Johnson",
-    email: "alice@school.edu",
-    grade: "A",
-    course: "Mathematics",
-    progress: 85
+    name: "JavaScript",
+    description: "The programming language of the web",
+    value: 400,
+    fill: "var(--chart-1)"
   },
   {
-    id: 2,
-    name: "Bob Smith",
-    email: "bob@school.edu",
-    grade: "B+",
-    course: "Science",
-    progress: 78
+    name: "Python",
+    description: "Train Machine Learning Models",
+    value: 300,
+    fill: "var(--chart-2)"
   },
   {
-    id: 3,
-    name: "Carol Davis",
-    email: "carol@school.edu",
-    grade: "A-",
-    course: "English",
-    progress: 92
+    name: "Java",
+    description: "Build Android Apps",
+    value: 200,
+    fill: "var(--chart-3)"
   },
   {
-    id: 4,
-    name: "David Wilson",
-    email: "david@school.edu",
-    grade: "B",
-    course: "History",
-    progress: 67
+    name: "C",
+    description: "Low-Level Systems Programming",
+    value: 100,
+    fill: "var(--chart-4)"
   }
 ];
 
 export const StudentDashboard = () => {
-  const [currentMessage, setCurrentMessage] = useState("");
-  const [messages, setMessages] = useState(mockMessages);
-  const [isConversationsOpen, setIsConversationsOpen] = useState(false);
-  const [isProgressOpen, setIsProgressOpen] = useState(false);
-
-  // Imported from components/page.tsx
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [progress, setProgress] = useState(65);
-  const [sliderValue, setSliderValue] = useState([50]);
   const [chatMessage, setChatMessage] = useState("");
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const { toast } = useToast();
-
-  const handleSendMessage = () => {
-    if (currentMessage.trim()) {
-      const newMessage = {
-        id: Date.now().toString(),
-        content: currentMessage,
-        sender: "user",
-        timestamp: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit"
-        })
-      };
-      setMessages([...messages, newMessage]);
-      setCurrentMessage("");
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
 
   return (
     <>
@@ -444,61 +125,61 @@ export const StudentDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="grid gap-6 md:grid-cols-2">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>My Schedule</CardTitle>
-                      <CardDescription>
-                        What you have planned by month
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <Calendar
-                        mode="single"
-                        selected={date}
-                        onSelect={setDate}
-                        className="rounded-md border w-full"
-                      />
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Upcoming Events</CardTitle>
-                      <CardDescription>
-                        Monthly enrollment and course completion data
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3 p-3 rounded-lg border">
-                          <CalendarIcon className="h-4 w-4 text-blue-500" />
-                          <div>
-                            <p className="font-medium">Midterm Exams</p>
-                            <p className="text-sm text-muted-foreground">
-                              March 15-20, 2024
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg border">
-                          <Clock className="h-4 w-4 text-green-500" />
-                          <div>
-                            <p className="font-medium">Assignment Due</p>
-                            <p className="text-sm text-muted-foreground">
-                              March 10, 2024
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg border">
-                          <Users className="h-4 w-4 text-purple-500" />
-                          <div>
-                            <p className="font-medium">Study Group</p>
-                            <p className="text-sm text-muted-foreground">
-                              March 8, 2024
-                            </p>
-                          </div>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>My Schedule</CardTitle>
+                    <CardDescription>
+                      What you have planned by month
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      className="rounded-md border w-full"
+                    />
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Upcoming Events</CardTitle>
+                    <CardDescription>
+                      Monthly enrollment and course completion data
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 p-3 rounded-lg border">
+                        <CalendarIcon className="h-4 w-4 text-blue-500" />
+                        <div>
+                          <p className="font-medium">Midterm Exams</p>
+                          <p className="text-sm text-muted-foreground">
+                            March 15-20, 2024
+                          </p>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
+                      <div className="flex items-center gap-3 p-3 rounded-lg border">
+                        <Clock className="h-4 w-4 text-green-500" />
+                        <div>
+                          <p className="font-medium">Assignment Due</p>
+                          <p className="text-sm text-muted-foreground">
+                            March 10, 2024
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 rounded-lg border">
+                        <Users className="h-4 w-4 text-purple-500" />
+                        <div>
+                          <p className="font-medium">Study Group</p>
+                          <p className="text-sm text-muted-foreground">
+                            March 8, 2024
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </CardContent>
           </Card>
@@ -572,8 +253,8 @@ export const StudentDashboard = () => {
                     </Avatar>
                     <div className="bg-muted rounded-lg p-3 max-w-[80%]">
                       <p className="text-sm">
-                        Hello! I'm your AI learning assistant. How can I help
-                        you with your studies today?
+                        Hello! I&apos;m your AI learning assistant. How can I
+                        help you with your studies today?
                       </p>
                     </div>
                   </div>
@@ -799,15 +480,7 @@ export const StudentDashboard = () => {
                         outerRadius={80}
                         fill="#8884d8"
                         dataKey="value"
-                        label={
-                          (({
-                            name,
-                            percent
-                          }: {
-                            name: string;
-                            percent: number;
-                          }) => `${name} ${(percent * 100).toFixed(0)}%`) as any
-                        }
+                        label={(data) => data.name + " " + data.value}
                       >
                         {pieData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.fill} />

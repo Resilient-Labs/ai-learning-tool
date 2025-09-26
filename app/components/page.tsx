@@ -1,7 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Card,
   CardContent,
@@ -9,31 +38,38 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent
+} from "@/components/ui/chart";
 import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Switch } from "@/components/ui/switch";
-import { Slider } from "@/components/ui/slider";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from "@/components/ui/accordion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "@/components/ui/collapsible";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList
+} from "@/components/ui/command";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger
+} from "@/components/ui/context-menu";
 import {
   Dialog,
   DialogContent,
@@ -44,23 +80,15 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from "@/components/ui/sheet";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger
-} from "@/components/ui/popover";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger
-} from "@/components/ui/hover-card";
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from "@/components/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -70,11 +98,18 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger
-} from "@/components/ui/context-menu";
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger
+} from "@/components/ui/hover-card";
+import { Input } from "@/components/ui/input";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot
+} from "@/components/ui/input-otp";
+import { Label } from "@/components/ui/label";
 import {
   Menubar,
   MenubarContent,
@@ -92,14 +127,46 @@ import {
   NavigationMenuTrigger
 } from "@/components/ui/navigation-menu";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from "@/components/ui/command";
-import { Calendar } from "@/components/ui/calendar";
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
+} from "@/components/ui/pagination";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover";
+import { Progress } from "@/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup
+} from "@/components/ui/resizable";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from "@/components/ui/sheet";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
 import {
   Table,
   TableBody,
@@ -109,26 +176,8 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from "@/components/ui/breadcrumb";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
-} from "@/components/ui/pagination";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { Toggle } from "@/components/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
@@ -137,56 +186,45 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useToast } from "@/hooks/use-toast";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger
-} from "@/components/ui/collapsible";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger
-} from "@/components/ui/drawer";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot
-} from "@/components/ui/input-otp";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup
-} from "@/components/ui/resizable";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from "@/components/ui/carousel";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from "@/components/ui/alert-dialog";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent
-} from "@/components/ui/chart";
+  Activity,
+  AlertCircle,
+  Bell,
+  BookOpen,
+  Bot,
+  CalendarIcon,
+  Camera,
+  CheckCircle,
+  ChevronDown,
+  Clock,
+  Download,
+  Edit,
+  Eye,
+  FileText,
+  GraduationCap,
+  Heart,
+  MessageCircle,
+  Mic,
+  Play,
+  Plus,
+  Search,
+  Send,
+  Settings,
+  Share,
+  Star,
+  Target,
+  ThumbsUp,
+  Trash,
+  Trash2,
+  TrendingUp,
+  Upload,
+  User,
+  Users,
+  XCircle,
+  Zap
+} from "lucide-react";
+import { useState } from "react";
 import {
   CartesianGrid,
   Cell,
@@ -194,64 +232,10 @@ import {
   LineChart,
   Pie,
   PieChart,
-  PieLabel,
   ResponsiveContainer,
   XAxis,
   YAxis
 } from "recharts";
-import {
-  BookOpen,
-  Users,
-  MessageCircle,
-  GraduationCap,
-  CalendarIcon,
-  Bell,
-  Settings,
-  Search,
-  ChevronDown,
-  Star,
-  Heart,
-  ThumbsUp,
-  Bot,
-  User,
-  Send,
-  Mic,
-  Camera,
-  FileText,
-  Download,
-  Upload,
-  Edit,
-  Trash2,
-  Plus,
-  Play,
-  AlertCircle,
-  CheckCircle,
-  Clock,
-  Eye,
-  Home,
-  Share,
-  Sidebar,
-  Target,
-  Trash,
-  TrendingUp,
-  XCircle,
-  Zap,
-  Activity
-} from "lucide-react";
-import {
-  SidebarProvider,
-  SidebarHeader,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarFooter,
-  SidebarTrigger
-} from "@/components/ui/sidebar";
-import { useToast } from "@/hooks/use-toast";
 
 const chartData = [
   { month: "Jan", students: 186, courses: 80 },
@@ -305,7 +289,7 @@ const students = [
 
 export default function MicroComponentsPage() {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [progress, setProgress] = useState(65);
+  const [progress] = useState(65);
   const [sliderValue, setSliderValue] = useState([50]);
   const [chatMessage, setChatMessage] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -637,18 +621,7 @@ export default function MicroComponentsPage() {
                               outerRadius={80}
                               fill="#8884d8"
                               dataKey="value"
-                              label={
-                                (({
-                                  name,
-                                  percent
-                                }: {
-                                  name: string;
-                                  percent: number;
-                                }) =>
-                                  `${name} ${(percent * 100).toFixed(
-                                    0
-                                  )}%`) as any
-                              }
+                              label={(data) => data.name + " " + data.value}
                             >
                               {pieData.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={entry.fill} />
@@ -2151,15 +2124,7 @@ export default function MicroComponentsPage() {
                           cy="50%"
                           outerRadius={80}
                           dataKey="value"
-                          label={
-                            (({
-                              name,
-                              value
-                            }: {
-                              name: string;
-                              value: number;
-                            }) => `${name} ${value}`) as any
-                          }
+                          label={(data) => data.name + " " + data.value}
                         />
                         <ChartTooltip content={<ChartTooltipContent />} />
                       </PieChart>
@@ -2657,7 +2622,7 @@ export default function MicroComponentsPage() {
                     </Avatar>
                     <div className="bg-muted rounded-lg p-3 max-w-[80%]">
                       <p className="text-sm">
-                        Hello! I'm your AI learning assistant. How can I help
+                        Hello! I&apos;m your AI learning assistant. How can I help
                         you with your studies today?
                       </p>
                     </div>

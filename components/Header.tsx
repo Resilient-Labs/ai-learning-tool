@@ -1,5 +1,6 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,23 +11,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { usePathname, useRouter } from "next/navigation";
 
 import {
   BookOpen,
   Brain,
-  Trophy,
-  Zap,
-  Target,
-  Clock,
-  Star,
-  ChevronRight,
-  Plus,
-  Settings,
   LogOut,
-  User
+  Settings,
+  Trophy,
+  User,
+  Zap
 } from "lucide-react";
 
 const user = {
