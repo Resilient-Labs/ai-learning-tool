@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { createUser, updateUser, deleteUser, getUserByClerkId } from "@/lib/database/user";
+import { createUser, updateUser, deleteUser, getUserByClerkId, updateLastActive } from "@/lib/database/user";
 
 // Type definitions for Clerk webhook events
 interface ClerkWebhookEvent {
@@ -34,7 +34,14 @@ interface UserWebhookData {
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
 
 // Valid webhook event types
-const VALID_EVENT_TYPES = ["user.created", "user.updated", "user.deleted"] as const;
+const VALID_EVENT_TYPES = [
+  "user.created", 
+  "user.updated", 
+  "user.deleted",
+  "session.created",  // Login event
+  "session.ended",    // Logout event
+  "session.removed"   // Session revoked
+] as const;
 type ValidEventType = typeof VALID_EVENT_TYPES[number];
 
 export async function GET() {
@@ -128,6 +135,15 @@ export async function POST(request: NextRequest) {
 
       case "user.deleted":
         await handleUserDeleted(id);
+        break;
+
+      case "session.created":
+        await handleUserLogin(id);
+        break;
+
+      case "session.ended":
+      case "session.removed":
+        await handleUserLogout(id);
         break;
     }
 
@@ -279,4 +295,30 @@ async function handleUserDeleted(userId: string) {
   await deleteUser(userId);
 
   console.log("User deleted successfully:", { userId });
+}
+
+async function handleUserLogin(userId: string) {
+  console.log("User login detected:", { userId });
+  
+  try {
+    // Update last_active_at timestamp
+    await updateLastActive(userId);
+    console.log("User login recorded successfully:", { userId });
+  } catch (error) {
+    console.error("Error recording user login:", error);
+    // Don't throw - login tracking is not critical
+  }
+}
+
+async function handleUserLogout(userId: string) {
+  console.log("User logout detected:", { userId });
+  
+  try {
+    // Could add logout tracking here if needed
+    // For now, just log the event
+    console.log("User logout recorded successfully:", { userId });
+  } catch (error) {
+    console.error("Error recording user logout:", error);
+    // Don't throw - logout tracking is not critical
+  }
 }

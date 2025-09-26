@@ -23,7 +23,7 @@ lt --port 3000
 ### 4. Configure Clerk Webhook
 1. Go to [Clerk Dashboard](https://dashboard.clerk.com) → Webhooks
 2. Add endpoint: `https://your-app-name.loca.lt/api/webhooks/clerk`
-3. Select events: `user.created`, `user.updated`, `user.deleted`
+3. Select events: `user.created`, `user.updated`, `user.deleted`,`session.create`,`session.ended`,`session.removed`
 4. Copy the webhook secret(signing secret)
 
 ### 5. Update environment variables
