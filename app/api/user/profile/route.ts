@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
     // If requesting specific user profile, check permissions
     if (targetUserId && targetUserId !== user.id) {
-      const canAccess = await canAccessProfile(targetUserId, "read");
+      const canAccess = await canAccessProfile(targetUserId);
       if (!canAccess) {
         return NextResponse.json(
           { error: "Insufficient permissions to view this profile" },
@@ -85,7 +85,7 @@ export async function PUT(request: NextRequest) {
 
     // If updating specific user profile, check permissions
     if (userId && userId !== user.id) {
-      const canAccess = await canAccessProfile(userId, "update");
+      const canAccess = await canAccessProfile(userId);
       if (!canAccess) {
         return NextResponse.json(
           { error: "Insufficient permissions to update this profile" },
