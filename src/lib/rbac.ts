@@ -128,7 +128,6 @@ function getRolePermissions(role: UserRole): Permission[] {
  */
 export function requirePermission(permission: Permission) {
   return async function permissionMiddleware(
-    request: Request
   ): Promise<{ success: boolean; error?: string }> {
     const hasAccess = await hasPermission(permission);
     
@@ -176,8 +175,7 @@ export async function getUserPermissions(): Promise<Permission[]> {
  * Check if user can access a specific profile (self or admin)
  */
 export async function canAccessProfile(
-  targetUserId: string,
-  action: "read" | "update" = "read"
+  targetUserId: string
 ): Promise<boolean> {
   try {
     const user = await getCurrentUser();
