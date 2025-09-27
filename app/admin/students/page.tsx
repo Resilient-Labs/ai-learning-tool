@@ -6,19 +6,19 @@ import { StatsCard } from "../../../components/ui/StatsCard"
 import { StudentCard } from "../../../components/admin/StudentCard"
 import { StudentTable } from "../../../components/admin/StudentTable"
 import { Student, generateSampleStudents, generateSampleStudentProgress } from "@/types/data"
-import { StudentProgressTracker } from "../../../components/instructor/StudentProgressTracker"
 import { IconSearch, IconUsers, IconBook, IconTrendingUp, IconClock } from "@tabler/icons-react"
+import { useRouter } from "next/navigation"
 
 interface Props {
   className?: string;
 }
 
 const StudentsPage: React.FC<Props> = () => {
-  const [viewMode, setViewMode] = useState<"cards" | "table">("cards")
+  const [viewMode, setViewMode] = useState<"cards" | "table">("table")
   const [searchTerm, setSearchTerm] = useState("")
+  const router = useRouter()
 
   const students = generateSampleStudents()
-  const studentProgress = generateSampleStudentProgress()
 
   const filteredStudents = students.filter(
     (student) =>
@@ -28,6 +28,7 @@ const StudentsPage: React.FC<Props> = () => {
 
   const handleStudentView = (student: Student) => {
     console.log('View student:', student);
+    router.push(`/admin/students/${student.id}`);
   };
 
   const handleStudentEdit = (student: Student) => {
@@ -134,12 +135,6 @@ const StudentsPage: React.FC<Props> = () => {
           onDelete={handleStudentDelete}
         />
       )}
-
-      {/* Student Progress Tracker */}
-      <StudentProgressTracker
-        students={studentProgress}
-        onViewStudent={(student) => console.log('View student:', student.name)}
-      />
     </div>
   );
 };
