@@ -7,6 +7,11 @@ export default function Page() {
       path="/sign-up"
       signInUrl="/sign-in"
       fallbackRedirectUrl="/post-auth"
+      appearance={{
+        elements: {
+          formButtonPrimary: "bg-red-600 hover:bg-red-700"
+        }
+      }}
     />
   )
 }
