@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerUser } from '@/lib/supabase/server';
 import { ConversationManager } from '@/lib/chat/conversation-manager';
-import { createAIProvider } from '@/lib/ai/ai-provider';
 import {
   withErrorHandling,
   createValidationError,
 } from '@/lib/middleware/error-handler';
 import { logApiRequest, logInfo } from '@/lib/utils/logger';
-
-// Initialize AI provider (can be easily switched)
-const aiProvider = createAIProvider('placeholder');
 
 
 export const POST = withErrorHandling(async (request: NextRequest) => {
@@ -54,15 +50,13 @@ export const POST = withErrorHandling(async (request: NextRequest) => {
     // Get conversation history for AI context
     const conversationContext = await conversationManager.getConversationHistory(sessionId, 10);
     
-    // Generate AI response using the provider
-    const aiResponse = await aiProvider.generateResponse(
-      conversationContext.messages,
-      {
-        maxTokens: 1000,
-        temperature: 0.7,
-        model: 'placeholder-model'
-      }
-    );
+    // Mock AI response for development
+    const aiResponse = {
+      content: "This is a mock AI response. Replace with actual AI integration when ready.",
+      tokenCount: 10,
+      modelName: 'mock-model',
+      responseTimeMs: 1000
+    };
 
     // Store AI response with metadata
     await conversationManager.storeMessage(sessionId, 'assistant', aiResponse.content, {
