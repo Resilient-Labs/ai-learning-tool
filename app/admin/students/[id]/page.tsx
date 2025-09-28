@@ -15,18 +15,35 @@ interface Widget {
 }
 
 interface PageProps {
-    params: {
-      id: string;
-    };
+    params: Promise<{ id: string }>;
   }
   
 
 const StudentAnalyticsDashboard  = ({params}: PageProps) => {
-  const { id } = params;
-  
-  // Mock students data
-  const students = generateSampleStudents();
-  const student = students.find((s) => s.id === parseInt(id));
+  // Load saved layout on mount
+  useEffect(() => {
+    const loadDashboard = async () => {
+      // Simulate API delay
+      const { id: studentId } = await params;
+      
+      // Find and set the selected student
+      const students = generateSampleStudents();
+      const foundStudent = students.find((s) => s.id === parseInt(studentId));
+      setSelectedStudent(foundStudent || null);
+      
+      await new Promise(resolve => setTimeout(resolve, 800))
+      
+      // Load saved layout from localStorage
+      const savedLayout = JSON.parse(localStorage.getItem('dashboard-layout') || 'null');
+      if (savedLayout) {
+        setWidgets(savedLayout);
+      }
+      
+      setIsLoading(false);
+    };
+
+    loadDashboard();
+  }, [params]);
 
   // Default layout configuration
   const defaultLayout: Widget[] = [
@@ -36,10 +53,13 @@ const StudentAnalyticsDashboard  = ({params}: PageProps) => {
   ];
 
   // State
-  const [selectedStudent, setSelectedStudent] = useState<Student | null>(student || null);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [widgets, setWidgets] = useState<Widget[]>(defaultLayout);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Mock students data
+  const students = generateSampleStudents();
 
   // Mock data for selected student
   const getStudentData = (student: Student | null): StudentData | null => {
@@ -54,23 +74,7 @@ const StudentAnalyticsDashboard  = ({params}: PageProps) => {
     return student.summary;
   };
 
-  // Load saved layout on mount
-  useEffect(() => {
-    const loadDashboard = async () => {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      // Load saved layout from localStorage
-      const savedLayout = JSON.parse(localStorage.getItem('dashboard-layout') || 'null');
-      if (savedLayout) {
-        setWidgets(savedLayout);
-      }
-      
-      setIsLoading(false);
-    };
-
-    loadDashboard();
-  }, []);
+ 
 
   // Save layout to localStorage
   const saveLayout = (newLayout: Widget[]) => {

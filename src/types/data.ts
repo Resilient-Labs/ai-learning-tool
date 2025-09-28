@@ -26,7 +26,7 @@ export interface StudentActivityData {
   sessionLengthDistribution: Array<{ range: string; count: number }>;
 }
 
-interface StudentSummary {
+export interface StudentSummary {
   totalSessionsToday: number;
   avgSessionLengthToday: number;
   activeStudents: number;
