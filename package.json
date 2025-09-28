@@ -23,8 +23,15 @@
     "jwks-client": "^2.0.6",
     "next": "15.5.4",
     "pg": "^8.16.3",
+    "@tabler/icons-react": "^3.35.0",
+    "@tailwindcss/postcss": "^4",
+    "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "postcss": "^8.4.47",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4",
     "svix": "^1.76.1"
   },
   "devDependencies": {
@@ -49,6 +56,7 @@
     "tailwindcss": "^4",
     "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@rushstack/eslint-patch": "^1"
   }
 }

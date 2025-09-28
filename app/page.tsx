@@ -1,7 +1,12 @@
-export default function Home() {
-  return (
-    <div>
-      <h1>Welcome to Next.js!</h1>
-    </div>
-  )
+import React from "react"
+import { redirect } from "next/navigation"
+
+interface Props {
+  className?: string;
 }
+
+const HomePage: React.FC<Props> = () => {
+  redirect("/admin")
+};
+
+export default HomePage;
