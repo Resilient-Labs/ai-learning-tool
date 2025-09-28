@@ -1,10 +1,28 @@
-'use client'
-import { generateSampleStudents, Student, StudentData, StudentSummary } from "@/types/data";
 import React, { useState, useEffect } from 'react';
-import MobileMenu from '../../../../components/data_visualization/MobileMenu';
-import AnalyticsHeader from '../../../../components/data_visualization/AnalyticsHeader';
-import SummaryCards from '../../../../components/data_visualization/SummaryCards';
-import WidgetGrid from '../../../../components/data_visualization/WidgetGrid';
+import MobileMenu from './MobileMenu';
+import AnalyticsHeader from './AnalyticsHeader';
+import SummaryCards from './SummaryCards';
+import WidgetGrid from './WidgetGrid';
+
+interface Student {
+  id: string;
+  name: string;
+  lastActive: string;
+  totalSessions: number;
+}
+
+interface StudentData {
+  lastActiveAt: string;
+  totalSessions: Array<{ date: string; sessions: number }>;
+  sessionLengthDistribution: Array<{ range: string; count: number }>;
+}
+
+interface StudentSummary {
+  totalSessionsToday: number;
+  avgSessionLengthToday: number;
+  activeStudents: number;
+  lastActiveAt: string;
+}
 
 interface Widget {
   id: string;
@@ -14,19 +32,40 @@ interface Widget {
   order: number;
 }
 
-interface PageProps {
-    params: {
-      id: string;
-    };
-  }
-  
-
-const StudentAnalyticsDashboard  = ({params}: PageProps) => {
-  const { id } = params;
-  
+const StudentAnalyticsDashboard: React.FC = () => {
   // Mock students data
-  const students = generateSampleStudents();
-  const student = students.find((s) => s.id === parseInt(id));
+  const mockStudents: Student[] = [
+    {
+      id: '1',
+      name: 'Alice Johnson',
+      lastActive: '2024-09-07T14:23:00Z',
+      totalSessions: 45
+    },
+    {
+      id: '2',
+      name: 'Bob Smith',
+      lastActive: '2024-09-06T09:15:00Z',
+      totalSessions: 32
+    },
+    {
+      id: '3',
+      name: 'Carol Davis',
+      lastActive: '2024-09-07T16:45:00Z',
+      totalSessions: 67
+    },
+    {
+      id: '4',
+      name: 'David Wilson',
+      lastActive: '2024-09-05T11:30:00Z',
+      totalSessions: 28
+    },
+    {
+      id: '5',
+      name: 'Eva Brown',
+      lastActive: '2024-09-07T13:20:00Z',
+      totalSessions: 51
+    }
+  ];
 
   // Default layout configuration
   const defaultLayout: Widget[] = [
@@ -36,7 +75,8 @@ const StudentAnalyticsDashboard  = ({params}: PageProps) => {
   ];
 
   // State
-  const [selectedStudent, setSelectedStudent] = useState<Student | null>(student || null);
+  const [students] = useState<Student[]>(mockStudents);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [widgets, setWidgets] = useState<Widget[]>(defaultLayout);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,13 +85,36 @@ const StudentAnalyticsDashboard  = ({params}: PageProps) => {
   const getStudentData = (student: Student | null): StudentData | null => {
     if (!student) return null;
 
-    return student.data;
+    return {
+      lastActiveAt: student.lastActive,
+      totalSessions: [
+        { date: '2024-09-01', sessions: Math.floor(Math.random() * 20) + 10 },
+        { date: '2024-09-02', sessions: Math.floor(Math.random() * 20) + 10 },
+        { date: '2024-09-03', sessions: Math.floor(Math.random() * 20) + 10 },
+        { date: '2024-09-04', sessions: Math.floor(Math.random() * 20) + 10 },
+        { date: '2024-09-05', sessions: Math.floor(Math.random() * 20) + 10 },
+        { date: '2024-09-06', sessions: Math.floor(Math.random() * 20) + 10 },
+        { date: '2024-09-07', sessions: Math.floor(Math.random() * 20) + 10 }
+      ],
+      sessionLengthDistribution: [
+        { range: '0-5min', count: Math.floor(Math.random() * 20) + 5 },
+        { range: '5-15min', count: Math.floor(Math.random() * 30) + 10 },
+        { range: '15-30min', count: Math.floor(Math.random() * 25) + 15 },
+        { range: '30-60min', count: Math.floor(Math.random() * 20) + 8 },
+        { range: '60min+', count: Math.floor(Math.random() * 15) + 5 }
+      ]
+    };
   };
 
   const getStudentSummary = (student: Student | null): StudentSummary | null => {
     if (!student) return null;
 
-    return student.summary;
+    return {
+      totalSessionsToday: Math.floor(Math.random() * 20) + 5,
+      avgSessionLengthToday: Math.floor(Math.random() * 30) + 15,
+      activeStudents: students.length,
+      lastActiveAt: student.lastActive
+    };
   };
 
   // Load saved layout on mount

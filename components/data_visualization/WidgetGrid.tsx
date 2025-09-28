@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import LastActiveWidget from './LastActiveWidget';
 import TotalSessionsWidget from './TotalSessionsWidget';
 import SessionLengthWidget from './SessionLengthWidget';
+import { StudentData } from '@/types/data';
 
 interface Widget {
   id: string;
@@ -9,12 +10,6 @@ interface Widget {
   title: string;
   size: 'small' | 'medium' | 'large';
   order: number;
-}
-
-interface StudentData {
-  lastActiveAt: string;
-  totalSessions: Array<{ date: string; sessions: number }>;
-  sessionLengthDistribution: Array<{ range: string; count: number }>;
 }
 
 interface WidgetGridProps {
@@ -102,7 +97,7 @@ const WidgetGrid: React.FC<WidgetGridProps> = ({
         {widget.type === 'card' && (
           <LastActiveWidget
             widget={widget}
-            lastActiveAt={studentData?.lastActiveAt || null}
+            lastActiveAt={studentData?.activity.lastActiveAt || null}
             onSizeChange={changeWidgetSize}
             onDragStart={handleDragStart}
           />
@@ -110,7 +105,7 @@ const WidgetGrid: React.FC<WidgetGridProps> = ({
         {widget.type === 'line-chart' && (
           <TotalSessionsWidget
             widget={widget}
-            data={studentData?.totalSessions || []}
+            data={studentData?.activity.totalSessions || []}
             onSizeChange={changeWidgetSize}
             onDragStart={handleDragStart}
           />
@@ -118,7 +113,7 @@ const WidgetGrid: React.FC<WidgetGridProps> = ({
         {widget.type === 'bar-chart' && (
           <SessionLengthWidget
             widget={widget}
-            data={studentData?.sessionLengthDistribution || []}
+            data={studentData?.activity.sessionLengthDistribution || []}
             onSizeChange={changeWidgetSize}
             onDragStart={handleDragStart}
           />
