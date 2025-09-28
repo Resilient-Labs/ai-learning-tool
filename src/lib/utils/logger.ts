@@ -38,12 +38,6 @@ export class Logger {
   // Log to console and database
   private async log(level: LogLevel, message: string, context?: LogContext): Promise<void> {
     const timestamp = new Date().toISOString();
-    // const logEntry = {
-  //   level,
-  //   message,
-  //   context: context || {},
-  //   timestamp
-  // };
 
     // Console logging
     switch (level) {
