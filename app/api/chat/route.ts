@@ -47,9 +47,6 @@ export const POST = withErrorHandling(async (request: NextRequest) => {
       messageLength: userMessage.content.length 
     });
 
-    // Get conversation history for AI context
-    const conversationContext = await conversationManager.getConversationHistory(sessionId, 10);
-    
     // Mock AI response for development
     const aiResponse = {
       content: "This is a mock AI response. Replace with actual AI integration when ready.",
