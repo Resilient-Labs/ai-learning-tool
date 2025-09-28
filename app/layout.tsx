@@ -1,3 +1,5 @@
+import { ClerkProvider } from '@clerk/nextjs'
+
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
@@ -23,12 +25,18 @@ const RootLayout: React.FC<Props> = (props) => {
   const { children } = props;
   
   return (
-    <html lang="en">
-      <body className={`font-sans ${inter.variable} antialiased`}>
+    // ClerkProvider wraps the entire app to provide authentication context
+    // The publishableKey prop ensures proper initialization and error handling
+    // PublishableKey is still needed.
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+      <html lang="en">
+        <body className={`font-sans ${inter.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
       </body>
-    </html>
+      </html>
+    </ClerkProvider>
   );
 };
 
 export default RootLayout;
+
