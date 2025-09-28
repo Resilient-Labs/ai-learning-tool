@@ -10,7 +10,7 @@ export interface Student {
 }
 
 //moves student data to a separate interface
-interface StudentData {
+export interface StudentData {
   activity: StudentActivityData;
   progress: number;
   lessonsCompleted: number;
@@ -19,7 +19,7 @@ interface StudentData {
   joinDate: string;
 }
 
-interface StudentActivityData {
+export interface StudentActivityData {
   status: "Active" | "Inactive" | "Pending";
   lastActiveAt: string;
   totalSessions: Array<{ date: string; sessions: number }>;
