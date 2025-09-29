@@ -23,18 +23,20 @@ interface Props {
 
 const RootLayout: React.FC<Props> = (props) => {
   const { children } = props;
+  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
   
   return (
-    // ClerkProvider wraps the entire app to provide authentication context
-    // The publishableKey prop ensures proper initialization and error handling
-    // PublishableKey is still needed.
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-      <html lang="en">
-        <body className={`font-sans ${inter.variable} antialiased`}>
-        <Suspense fallback={null}>{children}</Suspense>
+    <html lang="en">
+      <body className={`font-sans ${inter.variable} antialiased`}>
+        {clerkKey ? (
+          <ClerkProvider publishableKey={clerkKey}>
+            <Suspense fallback={null}>{children}</Suspense>
+          </ClerkProvider>
+        ) : (
+          <Suspense fallback={null}>{children}</Suspense>
+        )}
       </body>
-      </html>
-    </ClerkProvider>
+    </html>
   );
 };
 
