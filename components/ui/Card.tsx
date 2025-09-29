@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface CardProps {
   children: React.ReactNode;
@@ -26,45 +26,51 @@ interface CardDescriptionProps {
 }
 
 export const Card: React.FC<CardProps> = (props) => {
-  const { children, className = "" } = props;
+  const { children, className = "", ...rest } = props;
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 shadow-sm ${className}`}>
+    <div
+      className={`bg-white rounded-lg border border-gray-200 shadow-sm ${className}`}
+      {...rest}
+    >
       {children}
     </div>
   );
 };
 
 export const CardHeader: React.FC<CardHeaderProps> = (props) => {
-  const { children, className = "" } = props;
+  const { children, className = "", ...rest } = props;
   return (
-    <div className={`px-6 py-4 border-b border-gray-200 ${className}`}>
+    <div
+      className={`px-6 py-4 border-b border-gray-200 ${className}`}
+      {...rest}
+    >
       {children}
     </div>
   );
 };
 
 export const CardContent: React.FC<CardContentProps> = (props) => {
-  const { children, className = "" } = props;
+  const { children, className = "", ...rest } = props;
   return (
-    <div className={`px-6 py-4 ${className}`}>
+    <div className={`px-6 py-4 ${className}`} {...rest}>
       {children}
     </div>
   );
 };
 
 export const CardTitle: React.FC<CardTitleProps> = (props) => {
-  const { children, className = "" } = props;
+  const { children, className = "", ...rest } = props;
   return (
-    <h3 className={`text-lg font-semibold ${className}`}>
+    <h3 className={`text-lg font-semibold ${className}`} {...rest}>
       {children}
     </h3>
   );
 };
 
 export const CardDescription: React.FC<CardDescriptionProps> = (props) => {
-  const { children, className = "" } = props;
+  const { children, className = "", ...rest } = props;
   return (
-    <p className={`text-sm text-gray-600 ${className}`}>
+    <p className={`text-sm text-gray-600 ${className}`} {...rest}>
       {children}
     </p>
   );
