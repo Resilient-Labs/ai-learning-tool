@@ -6,9 +6,11 @@ import {
   createValidationError,
 } from '@/lib/middleware/error-handler';
 import { logApiRequest, logInfo } from '@/lib/utils/logger';
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 
 
-export const POST = withErrorHandling(async (request: NextRequest) => {
+export const POST = async (request: NextRequest) => {
   const startTime = Date.now();
   
   try {
@@ -16,7 +18,7 @@ export const POST = withErrorHandling(async (request: NextRequest) => {
     const { messages, sessionId: clientSessionId, sessionType = 'general' } = await request.json();
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      throw createValidationError('Messages array is required and cannot be empty.');
+      return NextResponse.json({ error: 'Messages array is required and cannot be empty.' }, { status: 400 });
     }
 
     // Get authenticated user with proper server-side auth
@@ -36,7 +38,7 @@ export const POST = withErrorHandling(async (request: NextRequest) => {
     // Get the latest user message
     const userMessage = messages[messages.length - 1];
     if (!userMessage.content?.trim()) {
-      throw createValidationError('Message content cannot be empty.');
+      return NextResponse.json({ error: 'Message content cannot be empty.' }, { status: 400 });
     }
 
     // Store user message with validation and sanitization
@@ -47,52 +49,75 @@ export const POST = withErrorHandling(async (request: NextRequest) => {
       messageLength: userMessage.content.length 
     });
 
-    // Mock AI response for development
-    const aiResponse = {
-      content: "This is a mock AI response. Replace with actual AI integration when ready.",
-      tokenCount: 10,
-      modelName: 'mock-model',
-      responseTimeMs: 1000
-    };
+    // AI response using Vercel AI SDK with OpenAI streaming
+    const result = await streamText({
+      model: openai('gpt-4o'),
+      messages: messages.map((msg: { role: string; content: string }) => ({
+        role: msg.role as 'user' | 'assistant' | 'system',
+        content: msg.content
+      })),
+      system: `You are an AI tutor for Resilient Coders students learning full-stack JavaScript development. 
+      
+      Your role is to:
+      - Provide clear, helpful explanations about JavaScript, React, TypeScript, HTML, CSS, and web development concepts
+      - Break down complex topics into digestible parts
+      - Give practical examples and code snippets when helpful
+      - Encourage learning and problem-solving
+      - Adapt your explanations to the student's level of understanding
+      - Ask follow-up questions to ensure comprehension
+      
+      Keep your responses focused on web development topics and maintain an encouraging, supportive tone.`,
+      onFinish: async (result) => {
+        // Store AI response with metadata when streaming is complete
+        if (result.text) {
+          await conversationManager.storeMessage(sessionId, 'assistant', result.text, {
+            tokenCount: result.usage?.totalTokens || 0,
+            modelName: 'gpt-4o',
+            responseTimeMs: Date.now() - startTime,
+          });
 
-    // Store AI response with metadata
-    await conversationManager.storeMessage(sessionId, 'assistant', aiResponse.content, {
-      tokenCount: aiResponse.tokenCount,
-      modelName: aiResponse.modelName,
-      responseTimeMs: aiResponse.responseTimeMs,
+          // Log completion
+          const updatedContext = await conversationManager.getConversationHistory(sessionId, 10);
+          const totalTime = Date.now() - startTime;
+          await logApiRequest('POST', '/api/chat', 200, totalTime, { 
+            userId, 
+            sessionId, 
+            messageCount: messages.length,
+            totalTokens: updatedContext.totalTokens,
+            responseTime: totalTime
+          });
+        }
+      },
     });
 
-    // Get updated conversation context after storing the AI response
-    const updatedContext = await conversationManager.getConversationHistory(sessionId, 10);
-
-    const totalTime = Date.now() - startTime;
-    await logApiRequest('POST', '/api/chat', 200, totalTime, { 
-      userId, 
-      sessionId, 
-      messageCount: messages.length,
-      totalTokens: updatedContext.totalTokens,
-      responseTime: aiResponse.responseTimeMs
-    });
+    // Return streaming response with session metadata
+    const response = result.toTextStreamResponse();
+    response.headers.set('X-Session-ID', sessionId);
+    response.headers.set('X-User-ID', userId);
     
-    return NextResponse.json({ 
-      message: aiResponse.content,
-      sessionId: sessionId,
-      metadata: {
-        tokenCount: aiResponse.tokenCount,
-        modelName: aiResponse.modelName,
-        responseTimeMs: aiResponse.responseTimeMs,
-        totalTokens: updatedContext.totalTokens,
-      }
-    });
+    return response;
 
   } catch (error) {
     const totalTime = Date.now() - startTime;
     await logApiRequest('POST', '/api/chat', 500, totalTime, { 
       error: error instanceof Error ? error.message : 'Unknown error' 
     });
-    throw error;
+    
+    console.error('Chat API error:', error);
+    
+    // Handle specific OpenAI errors
+    if (error instanceof Error) {
+      if (error.message.includes('API key')) {
+        return NextResponse.json({ error: 'OpenAI API key not configured' }, { status: 500 });
+      }
+      if (error.message.includes('quota')) {
+        return NextResponse.json({ error: 'API quota exceeded' }, { status: 429 });
+      }
+    }
+    
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
-});
+};
 
 export const GET = withErrorHandling(async (request: NextRequest) => {
   const startTime = Date.now();

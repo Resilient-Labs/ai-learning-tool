@@ -34,6 +34,9 @@ DATABASE_URL="postgresql://user:password@host:port/database"
 # Clerk Auth (Sprint 1 stubs)
 CLERK_JWT_ISSUER="https://your-clerk-domain.clerk.accounts.dev"
 CLERK_JWK_URL="https://your-clerk-domain.clerk.accounts.dev/.well-known/jwks.json"
+
+# AI Chat Integration
+OPENAI_API_KEY="sk-your-openai-api-key-here"
 ```
 
 ## Setup Instructions
