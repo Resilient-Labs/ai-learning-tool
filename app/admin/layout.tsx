@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { IconHome, IconUsers, IconBook, IconMessageCircle, IconChartBar, IconX, IconMenu } from "@tabler/icons-react"
+import { IconHome, IconUsers, IconBook, IconMessageCircle, IconChartBar, IconX, IconMenu, IconMessageChatbot } from "@tabler/icons-react"
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: IconHome },
@@ -11,6 +11,7 @@ const navigation = [
   { name: "Lessons", href: "/admin/lessons", icon: IconBook },
   { name: "Conversations", href: "/admin/conversations", icon: IconMessageCircle },
   { name: "Analytics", href: "/admin/analytics", icon: IconChartBar },
+  { name: "Chatbot", href: "/admin/chatbot", icon: IconMessageChatbot },
 ]
 
 interface Props {
