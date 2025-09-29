@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface Props {
   placeholder?: string;
@@ -9,12 +9,13 @@ interface Props {
 }
 
 export const Input: React.FC<Props> = (props) => {
-  const { 
-    placeholder, 
-    value, 
-    onChange, 
+  const {
+    placeholder,
+    value,
+    onChange,
     className = "",
-    type = "text"
+    type = "text",
+    ...rest
   } = props;
   return (
     <input
@@ -23,6 +24,7 @@ export const Input: React.FC<Props> = (props) => {
       value={value}
       onChange={onChange}
       className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 ${className}`}
+      {...rest}
     />
   );
 };
