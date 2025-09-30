@@ -24,13 +24,18 @@ export async function POST(req: Request) {
   const key = `e:${email.toLowerCase().trim()}`;
   const { success, remaining, reset } = await emailLimiter.limit(key);
 
-  // Best-effort audit (remove if you don’t log)
-  supabaseAdmin?.from('security_events').insert({
-    kind: success ? 'password_reset_request' : 'rate_limit_email',
-    hashed_email: hashEmail(email),
-    ip,
-    meta: { remaining, reset },
-  }).then(() => {}).catch(() => {});
+  // Best-effort audit (remove if you don't log)
+  if (supabaseAdmin) {
+    const insertPromise = supabaseAdmin.from('security_events').insert({
+      kind: success ? 'password_reset_request' : 'rate_limit_email',
+      hashed_email: hashEmail(email),
+      ip,
+      meta: { remaining, reset },
+    });
+
+    // Handle the promise properly
+    Promise.resolve(insertPromise).catch(() => {});
+  }
 
   // We do NOT trigger Clerk; user uses <SignIn/> "Forgot password?"
   return accepted;
