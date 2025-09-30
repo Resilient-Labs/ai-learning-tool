@@ -1,8 +1,3 @@
-/*
-TODO: Frontend team can override or move this file
-      sample login page for testing
-*/
-
 import { NextResponse } from 'next/server';
 import { emailLimiter } from '@/lib/rate-limit';
 import { hashEmail } from '@/lib/security';

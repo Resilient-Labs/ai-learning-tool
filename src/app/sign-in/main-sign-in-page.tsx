@@ -11,8 +11,3 @@ export default function MainSignInPage() {
     />
   );
 }
-
-/*
-TODO: Frontend team can override or move this file
-      sample login page for testing
-*/
