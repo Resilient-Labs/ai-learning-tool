@@ -1,12 +1,3 @@
-import React from "react"
-import { redirect } from "next/navigation"
-
-interface Props {
-  className?: string;
+export default function Page() {
+  return <h1>Hello, Next.js!</h1>
 }
-
-const HomePage: React.FC<Props> = () => {
-  redirect("/admin")
-};
-
-export default HomePage;
