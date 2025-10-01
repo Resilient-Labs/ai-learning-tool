@@ -1,9 +1,13 @@
 "use client";
 
 import { StudentDashboard } from "@/components/student-dashboard";
+import React from "react"
 
-export default function Page() {
+interface Props {
+  className?: string;
+}
 
+const HomePage: React.FC<Props> = () => {
   return (
     <>
       <main className="flex-1 p-5">
@@ -11,4 +15,6 @@ export default function Page() {
       </main>
     </>
   );
-}
+};
+
+export default HomePage;
