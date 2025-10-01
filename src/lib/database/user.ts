@@ -83,7 +83,10 @@ export async function updateUser(
     email: string;
     firstName: string;
     lastName: string;
+    fullName: string;
     role: "student" | "admin";
+    cohort: string;
+    avatarUrl: string;
   }>
 ): Promise<DatabaseUser | null> {
   try {
@@ -92,6 +95,8 @@ export async function updateUser(
       email?: string;
       role?: AppRole;
       full_name?: string | null;
+      cohort?: string;
+      avatar_url?: string;
     } = {
       updated_at: new Date().toISOString(),
     };
@@ -99,9 +104,13 @@ export async function updateUser(
     // Map updates to Supabase schema
     if (updates.email) updateData.email = updates.email;
     if (updates.role) updateData.role = updates.role as AppRole;
+    if (updates.cohort) updateData.cohort = updates.cohort;
+    if (updates.avatarUrl) updateData.avatar_url = updates.avatarUrl;
     
-    // Handle name updates
-    if (updates.firstName || updates.lastName) {
+    // Handle name updates - support both fullName directly and firstName/lastName
+    if (updates.fullName) {
+      updateData.full_name = updates.fullName.trim() || null;
+    } else if (updates.firstName || updates.lastName) {
       // Get current user to construct full name
       const { data: currentUser } = await supabaseAdmin
         .from('profiles')
