@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '../ui/Card';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/CardComponent';
 import { TopicDifficulty } from '@/types/data';
 import { IconChartBar, IconAlertCircle, IconClock, IconCheck } from '@tabler/icons-react';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '../ui/Card';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/CardComponent';
 import { IconUsers, IconClock, IconTrendingUp, IconAlertTriangle } from '@tabler/icons-react';
 
 interface Props {
