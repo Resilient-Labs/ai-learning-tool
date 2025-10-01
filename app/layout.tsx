@@ -1,8 +1,6 @@
 import { Header } from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ClerkProvider } from '@clerk/nextjs'
 import type React from "react"
@@ -33,31 +31,17 @@ export default function RootLayout({
         {clerkKey ? (
           <ClerkProvider publishableKey={clerkKey}>
             <Suspense fallback={null}>
-              {/* <ThemeProvider
-                attribute="class"
-                defaultTheme="light"
-                enableSystem
-                disableTransitionOnChange
-              > */}
                 <Header />
                 {children}
                 <Toaster />
-              {/* </ThemeProvider> */}
               <Analytics />
             </Suspense>
           </ClerkProvider>
         ) : (
           <Suspense fallback={null}>
-            {/* <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            > */}
               <Header />
               {children}
               <Toaster />
-            {/* </ThemeProvider> */}
             <Analytics />
           </Suspense>
         )}
