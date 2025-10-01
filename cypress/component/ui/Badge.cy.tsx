@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge } from "../../../components/ui/Badge";
+import { Badge } from "../../../components/ui/BadgeComponent";
 
 describe("Badge Component", () => {
   // 1. Fundamental Structure
