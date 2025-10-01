@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, CardTitle } from '../ui/Card';
-import { Badge } from '../ui/Badge';
+import { Card, CardHeader, CardContent, CardTitle } from '../ui/CardComponent';
+import { Badge } from '../ui/BadgeComponent';
 import { HotTopic } from '@/types/data';
 import { IconTrendingUp, IconMessageCircle, IconClock, IconUsers } from '@tabler/icons-react';
 

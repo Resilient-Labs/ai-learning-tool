@@ -5,11 +5,11 @@ import {
   generateSampleTopicDifficulties,
   generateSampleHotTopics
 } from "@/types/data"
-import { Button } from "../../components/ui/Button"
+import { Button } from "../../components/ui/ButtonComponent"
 import { StatsCard } from "../../components/ui/StatsCard"
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "../../components/ui/Card"
-import { Badge } from "../../components/ui/Badge"
-import { Avatar } from "../../components/ui/Avatar"
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "../../components/ui/CardComponent"
+import { Badge } from "../../components/ui/BadgeComponent"
+import { Avatar } from "../../components/ui/AvatarComponent"
 import { ClassOverview } from "../../components/instructor/ClassOverview"
 import { TopicDifficultyAnalysis } from "../../components/instructor/TopicDifficultyAnalysis"
 import { StrugglingStudentsAlert } from "../../components/instructor/StrugglingStudentsAlert"

@@ -1,10 +1,10 @@
 "use client"
 import React from "react"
 // import { generateSampleAnalytics } from "@/types/data"
-import { Button } from "../../../components/ui/Button"
+import { Button } from "../../../components/ui/ButtonComponent"
 import { StatsCard } from "../../../components/ui/StatsCard"
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "../../../components/ui/Card"
-import { Badge } from "../../../components/ui/Badge"
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "../../../components/ui/CardComponent"
+import { Badge } from "../../../components/ui/BadgeComponent"
 
 interface Props {
   className?: string;

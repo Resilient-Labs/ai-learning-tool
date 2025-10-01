@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '../ui/Card';
-import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '../ui/CardComponent';
+import { Button } from '../ui/ButtonComponent';
+import { Badge } from '../ui/BadgeComponent';
 import { Lesson } from '@/types/data';
 import { IconEye, IconEdit, IconTrash } from '@tabler/icons-react';
 

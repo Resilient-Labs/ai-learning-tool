@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar } from "../../../components/ui/Avatar";
+import { Avatar } from "../../../components/ui/AvatarComponent";
 
 describe("Avatar Component", () => {
   // 1. Fundamental Structure

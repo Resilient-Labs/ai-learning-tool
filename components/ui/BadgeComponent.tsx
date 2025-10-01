@@ -13,7 +13,7 @@ export const Badge: React.FC<Props> = (props) => {
   const variantClasses = {
     default: "bg-green-100 text-green-800",
     secondary: "bg-gray-100 text-gray-800",
-    outline: "border border-gray-300 text-gray-700",
+    outline: "border border-gray-300 text-gray-700"
   };
 
   return (
