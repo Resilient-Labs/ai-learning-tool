@@ -5,13 +5,32 @@ export interface Student {
   name: string;
   email: string;
   avatar?: string;
-  joinDate: string;
-  status: "Active" | "Inactive" | "Pending";
+  data: StudentData;
+  summary: StudentSummary;
+}
+
+//moves student data to a separate interface
+export interface StudentData {
+  activity: StudentActivityData;
   progress: number;
   lessonsCompleted: number;
   totalLessons: number;
-  lastActive: string;
   streak: number;
+  joinDate: string;
+}
+
+export interface StudentActivityData {
+  status: "Active" | "Inactive" | "Pending";
+  lastActiveAt: string;
+  totalSessions: Array<{ date: string; sessions: number }>;
+  sessionLengthDistribution: Array<{ range: string; count: number }>;
+}
+
+export interface StudentSummary {
+  totalSessionsToday: number;
+  avgSessionLengthToday: number;
+  activeStudents: number;
+  lastActiveAt: string;
 }
 
 export interface Lesson {
@@ -71,68 +90,202 @@ export interface RecentActivity {
   timestamp: string;
   status: string;
 }
-
 // Sample data generators
 export const generateSampleStudents = (): Student[] => [
   {
     id: 1,
     name: "Alex Johnson",
     email: "alex@example.com",
-    joinDate: "2024-01-15",
-    status: "Active",
-    progress: 85,
-    lessonsCompleted: 12,
-    totalLessons: 15,
-    lastActive: "2 hours ago",
-    streak: 7,
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    data: {
+      activity: {
+        status: "Active",
+        lastActiveAt: "2024-01-15T10:30:00Z",
+        totalSessions: [
+          { date: "2024-01-15", sessions: 3 },
+          { date: "2024-01-14", sessions: 2 },
+          { date: "2024-01-13", sessions: 4 },
+          { date: "2024-01-12", sessions: 1 },
+          { date: "2024-01-11", sessions: 3 },
+          { date: "2024-01-10", sessions: 2 },
+          { date: "2024-01-09", sessions: 5 }
+        ],
+        sessionLengthDistribution: [
+          { range: "0-5min", count: 2 },
+          { range: "5-15min", count: 5 },
+          { range: "15-30min", count: 8 },
+          { range: "30-60min", count: 3 },
+          { range: "60min+", count: 1 }
+        ]
+      },
+      progress: 85,
+      lessonsCompleted: 12,
+      totalLessons: 15,
+      streak: 7,
+      joinDate: "2024-01-15"
+    },
+    summary: {
+      totalSessionsToday: 3,
+      avgSessionLengthToday: 25.5,
+      activeStudents: 1089,
+      lastActiveAt: "2024-01-15T10:30:00Z"
+    }
   },
   {
     id: 2,
     name: "Maria Garcia",
     email: "maria@example.com",
-    joinDate: "2024-01-20",
-    status: "Active",
-    progress: 92,
-    lessonsCompleted: 18,
-    totalLessons: 20,
-    lastActive: "1 hour ago",
-    streak: 12,
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+    data: {
+      activity: {
+        status: "Active",
+        lastActiveAt: "2024-01-20T14:15:00Z",
+        totalSessions: [
+          { date: "2024-01-20", sessions: 4 },
+          { date: "2024-01-19", sessions: 3 },
+          { date: "2024-01-18", sessions: 5 },
+          { date: "2024-01-17", sessions: 2 },
+          { date: "2024-01-16", sessions: 4 },
+          { date: "2024-01-15", sessions: 3 },
+          { date: "2024-01-14", sessions: 6 }
+        ],
+        sessionLengthDistribution: [
+          { range: "0-5min", count: 1 },
+          { range: "5-15min", count: 3 },
+          { range: "15-30min", count: 12 },
+          { range: "30-60min", count: 8 },
+          { range: "60min+", count: 4 }
+        ]
+      },
+      progress: 92,
+      lessonsCompleted: 18,
+      totalLessons: 20,
+      streak: 12,
+      joinDate: "2024-01-20"
+    },
+    summary: {
+      totalSessionsToday: 4,
+      avgSessionLengthToday: 42.3,
+      activeStudents: 1089,
+      lastActiveAt: "2024-01-20T14:15:00Z"
+    }
   },
   {
     id: 3,
     name: "David Chen",
     email: "david@example.com",
-    joinDate: "2024-01-25",
-    status: "Pending",
-    progress: 45,
-    lessonsCompleted: 6,
-    totalLessons: 15,
-    lastActive: "1 day ago",
-    streak: 3,
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    data: {
+      activity: {
+        status: "Pending",
+        lastActiveAt: "2024-01-25T09:45:00Z",
+        totalSessions: [
+          { date: "2024-01-25", sessions: 1 },
+          { date: "2024-01-24", sessions: 0 },
+          { date: "2024-01-23", sessions: 2 },
+          { date: "2024-01-22", sessions: 1 },
+          { date: "2024-01-21", sessions: 0 },
+          { date: "2024-01-20", sessions: 1 },
+          { date: "2024-01-19", sessions: 2 }
+        ],
+        sessionLengthDistribution: [
+          { range: "0-5min", count: 3 },
+          { range: "5-15min", count: 2 },
+          { range: "15-30min", count: 1 },
+          { range: "30-60min", count: 0 },
+          { range: "60min+", count: 0 }
+        ]
+      },
+      progress: 45,
+      lessonsCompleted: 6,
+      totalLessons: 15,
+      streak: 3,
+      joinDate: "2024-01-25"
+    },
+    summary: {
+      totalSessionsToday: 1,
+      avgSessionLengthToday: 8.2,
+      activeStudents: 1089,
+      lastActiveAt: "2024-01-25T09:45:00Z"
+    }
   },
   {
     id: 4,
     name: "Sarah Wilson",
     email: "sarah@example.com",
-    joinDate: "2024-02-01",
-    status: "Active",
-    progress: 78,
-    lessonsCompleted: 14,
-    totalLessons: 18,
-    lastActive: "3 hours ago",
-    streak: 5,
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    data: {
+      activity: {
+        status: "Active",
+        lastActiveAt: "2024-02-01T16:20:00Z",
+        totalSessions: [
+          { date: "2024-02-01", sessions: 2 },
+          { date: "2024-01-31", sessions: 3 },
+          { date: "2024-01-30", sessions: 1 },
+          { date: "2024-01-29", sessions: 4 },
+          { date: "2024-01-28", sessions: 2 },
+          { date: "2024-01-27", sessions: 3 },
+          { date: "2024-01-26", sessions: 1 }
+        ],
+        sessionLengthDistribution: [
+          { range: "0-5min", count: 1 },
+          { range: "5-15min", count: 4 },
+          { range: "15-30min", count: 6 },
+          { range: "30-60min", count: 4 },
+          { range: "60min+", count: 2 }
+        ]
+      },
+      progress: 78,
+      lessonsCompleted: 14,
+      totalLessons: 18,
+      streak: 5,
+      joinDate: "2024-02-01"
+    },
+    summary: {
+      totalSessionsToday: 2,
+      avgSessionLengthToday: 28.7,
+      activeStudents: 1089,
+      lastActiveAt: "2024-02-01T16:20:00Z"
+    }
   },
   {
     id: 5,
     name: "Michael Brown",
     email: "michael@example.com",
-    joinDate: "2024-02-05",
-    status: "Inactive",
-    progress: 30,
-    lessonsCompleted: 4,
-    totalLessons: 15,
-    lastActive: "1 week ago",
-    streak: 0,
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    data: {
+      activity: {
+        status: "Inactive",
+        lastActiveAt: "2024-02-05T11:10:00Z",
+        totalSessions: [
+          { date: "2024-02-05", sessions: 1 },
+          { date: "2024-02-04", sessions: 0 },
+          { date: "2024-02-03", sessions: 0 },
+          { date: "2024-02-02", sessions: 0 },
+          { date: "2024-02-01", sessions: 0 },
+          { date: "2024-01-31", sessions: 0 },
+          { date: "2024-01-30", sessions: 1 }
+        ],
+        sessionLengthDistribution: [
+          { range: "0-5min", count: 2 },
+          { range: "5-15min", count: 1 },
+          { range: "15-30min", count: 0 },
+          { range: "30-60min", count: 0 },
+          { range: "60min+", count: 0 }
+        ]
+      },
+      progress: 30,
+      lessonsCompleted: 4,
+      totalLessons: 15,
+      streak: 0,
+      joinDate: "2024-02-05"
+    },
+    summary: {
+      totalSessionsToday: 0,
+      avgSessionLengthToday: 6.5,
+      activeStudents: 1089,
+      lastActiveAt: "2024-02-05T11:10:00Z"
+    }
   },
 ];
 
