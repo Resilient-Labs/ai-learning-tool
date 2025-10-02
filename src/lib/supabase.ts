@@ -5,10 +5,21 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholde
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// For server-side operations that need service role key
 export const supabaseAdmin = createClient(
   supabaseUrl,
-  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder_service_key',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY|| 'placeholder_service_key', //temporarily using anon key here to aid with frontend development
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  }
+);
+
+// For server-side operations that need service role key
+export const supabaseServerSide = createClient(
+  supabaseUrl,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY|| 'placeholder_service_key', 
   {
     auth: {
       autoRefreshToken: false,

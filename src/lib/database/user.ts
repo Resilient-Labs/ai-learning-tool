@@ -13,7 +13,15 @@ export interface DatabaseUser {
   full_name?: string;
   created_at: string;
   updated_at: string;
-  last_active_at?: string;
+  cohort?: string;
+  session_count: number;
+  total_time_seconds: number;
+  total_topics: string[];
+  achievements: unknown[];
+  last_session_ended_at?: string;
+  avatar_url?: string;
+  auth_provider: string;
+  external_auth_id?: string;
 }
 
 // Type for app_role enum in Supabase
@@ -42,6 +50,12 @@ export async function createUser(userData: {
         email: userData.email,
         role: userData.role as AppRole,
         full_name: fullName,
+        // Set default values for Sprint-1 fields
+        session_count: 0,
+        total_time_seconds: 0,
+        total_topics: [],
+        achievements: [],
+        auth_provider: 'clerk',
       })
       .select()
       .single();
@@ -69,7 +83,10 @@ export async function updateUser(
     email: string;
     firstName: string;
     lastName: string;
+    fullName: string;
     role: "student" | "admin";
+    cohort: string;
+    avatarUrl: string;
   }>
 ): Promise<DatabaseUser | null> {
   try {
@@ -78,6 +95,8 @@ export async function updateUser(
       email?: string;
       role?: AppRole;
       full_name?: string | null;
+      cohort?: string;
+      avatar_url?: string;
     } = {
       updated_at: new Date().toISOString(),
     };
@@ -85,9 +104,13 @@ export async function updateUser(
     // Map updates to Supabase schema
     if (updates.email) updateData.email = updates.email;
     if (updates.role) updateData.role = updates.role as AppRole;
+    if (updates.cohort) updateData.cohort = updates.cohort;
+    if (updates.avatarUrl) updateData.avatar_url = updates.avatarUrl;
     
-    // Handle name updates
-    if (updates.firstName || updates.lastName) {
+    // Handle name updates - support both fullName directly and firstName/lastName
+    if (updates.fullName) {
+      updateData.full_name = updates.fullName.trim() || null;
+    } else if (updates.firstName || updates.lastName) {
       // Get current user to construct full name
       const { data: currentUser } = await supabaseAdmin
         .from('profiles')
@@ -176,12 +199,16 @@ export async function getUserByClerkId(clerkId: string): Promise<DatabaseUser | 
 
 /**
  * Update user's last active timestamp
+ * Updates last_session_ended_at when user logs in
  */
 export async function updateLastActive(clerkId: string): Promise<void> {
   try {
     const { error } = await supabaseAdmin
       .from('profiles')
-      .update({ updated_at: new Date().toISOString() })
+      .update({ 
+        last_session_ended_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      })
       .eq('clerk_user_id', clerkId);
 
     if (error) {
@@ -238,5 +265,92 @@ export async function getUsersByRole(role: "student" | "admin"): Promise<Databas
   } catch (error) {
     console.error("Error getting users by role:", error);
     return [];
+  }
+}
+
+/**
+ * Update user session progress
+ * Called when user completes a session or achieves something
+ */
+export async function updateUserProgress(
+  clerkId: string,
+  updates: {
+    sessionIncrement?: number;
+    timeSecondsIncrement?: number;
+    newTopics?: string[];
+    newAchievements?: Array<{
+      slug: string;
+      name: string;
+      description?: string;
+      earned_at: string;
+    }>;
+    cohort?: string;
+  }
+): Promise<DatabaseUser | null> {
+  try {
+    // First get current user data
+    const currentUser = await getUserByClerkId(clerkId);
+    if (!currentUser) {
+      throw new Error(`User not found: ${clerkId}`);
+    }
+
+    const updateData: {
+      updated_at: string;
+      session_count?: number;
+      total_time_seconds?: number;
+      total_topics?: string[];
+      achievements?: unknown[];
+      cohort?: string;
+      last_session_ended_at?: string;
+    } = {
+      updated_at: new Date().toISOString(),
+    };
+
+    // Update session count
+    if (updates.sessionIncrement) {
+      updateData.session_count = currentUser.session_count + updates.sessionIncrement;
+      updateData.last_session_ended_at = new Date().toISOString();
+    }
+
+    // Update total time
+    if (updates.timeSecondsIncrement) {
+      updateData.total_time_seconds = currentUser.total_time_seconds + updates.timeSecondsIncrement;
+    }
+
+    // Update topics (merge and dedupe)
+    if (updates.newTopics && updates.newTopics.length > 0) {
+      const existingTopics = currentUser.total_topics || [];
+      const allTopics = [...existingTopics, ...updates.newTopics];
+      updateData.total_topics = [...new Set(allTopics)]; // Remove duplicates
+    }
+
+    // Update achievements (append new ones)
+    if (updates.newAchievements && updates.newAchievements.length > 0) {
+      const existingAchievements = Array.isArray(currentUser.achievements) ? currentUser.achievements : [];
+      updateData.achievements = [...existingAchievements, ...updates.newAchievements];
+    }
+
+    // Update cohort if provided
+    if (updates.cohort) {
+      updateData.cohort = updates.cohort;
+    }
+
+    const { data, error } = await supabaseAdmin
+      .from('profiles')
+      .update(updateData)
+      .eq('clerk_user_id', clerkId)
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Supabase error updating user progress:", error);
+      throw error;
+    }
+
+    console.log("User progress updated:", { clerkId, updates: Object.keys(updateData) });
+    return data;
+  } catch (error) {
+    console.error("Error updating user progress:", error);
+    throw error;
   }
 }

@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Return profile data
+    // Return profile data with all schema fields
     const profileData = {
       id: profile.user_id,
       clerk_user_id: profile.clerk_user_id,
@@ -46,7 +46,15 @@ export async function GET(request: NextRequest) {
       role: profile.role,
       createdAt: profile.created_at,
       updatedAt: profile.updated_at,
-      lastActiveAt: profile.last_active_at,
+      cohort: profile.cohort,
+      sessionCount: profile.session_count,
+      totalTimeSeconds: profile.total_time_seconds,
+      totalTopics: profile.total_topics,
+      achievements: profile.achievements,
+      lastSessionEndedAt: profile.last_session_ended_at,
+      avatarUrl: profile.avatar_url,
+      authProvider: profile.auth_provider,
+      externalAuthId: profile.external_auth_id,
     };
 
     return NextResponse.json({
@@ -95,8 +103,8 @@ export async function PUT(request: NextRequest) {
       targetUserId = userId;
     }
 
-    // Validate update data
-    const allowedFields = ["fullName", "email"];
+    // Validate update data - expanded to include more profile fields
+    const allowedFields = ["fullName", "email", "cohort", "avatarUrl"];
     const filteredData: Record<string, string> = {};
     
     for (const [key, value] of Object.entries(updateData)) {
@@ -144,7 +152,17 @@ export async function PUT(request: NextRequest) {
         email: updatedProfile.email,
         fullName: updatedProfile.full_name,
         role: updatedProfile.role,
+        createdAt: updatedProfile.created_at,
         updatedAt: updatedProfile.updated_at,
+        cohort: updatedProfile.cohort,
+        sessionCount: updatedProfile.session_count,
+        totalTimeSeconds: updatedProfile.total_time_seconds,
+        totalTopics: updatedProfile.total_topics,
+        achievements: updatedProfile.achievements,
+        lastSessionEndedAt: updatedProfile.last_session_ended_at,
+        avatarUrl: updatedProfile.avatar_url,
+        authProvider: updatedProfile.auth_provider,
+        externalAuthId: updatedProfile.external_auth_id,
       },
       updatedBy: user.id
     });
